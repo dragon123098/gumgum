@@ -1,33 +1,10 @@
 #include <iostream>
-//main loop
-
-//sets up the board
-char board[3][3] = {{' ',' ',' '},{' ',' ',' ',},{' ',' ',' '}};
-
-void printboard()
-{
-  std::cout << "  0 1 2" << std::endl;
-  for(int i=0; i<3; i++)
-  {
-    std::cout << i << "";
-    for(int j=0;j<3; j++)
-    {
-      std::cout << board[i][j];
-      if(j < 2){
-        std::cout << "|";
-      }
-    }
-    std::cout << std::endl;
-    if(i<2){
-      std::cout << " -----" << std::endl;
-    }
-  }
-}
+#include "game.hpp"
 
 //main loop
 int main()
 {
-
+  Game myGame;
   //variables
   int turn = 0;
   bool gameOver = false;
@@ -40,7 +17,7 @@ int main()
 
   while(gameOver == false)
   {
-    printboard();
+    myGame.printboard();
     if(turn == 0)
       {
       //player ones turn
@@ -57,14 +34,7 @@ int main()
     std::cin >> rowIn;
     std::cout << "Pick a collum:";
     std::cin >> colIn;
-    if(turn == 0)
-    {
-      board[rowIn][colIn] = 'X';
-    }
-    else
-    {
-      board[rowIn][colIn] = 'O';
-    }
+    myGame.makeMove(turn, rowIn, colIn);
     turn++;
     turn %= 2; // alternates turn
 
